@@ -4,6 +4,7 @@ gem 'rails', '4.0.2'
 
 gem 'pg'
 gem 'barrister'
+gem 'barrister-rails'
 gem 'active_attr'
 gem 'foreman'
 

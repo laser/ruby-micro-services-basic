@@ -32,6 +32,9 @@ GEM
     atomic (1.1.14)
     barrister (0.1.1)
       json (>= 1.5.0)
+    barrister-rails (0.0.1)
+      active_attr (~> 0)
+      barrister (~> 0)
     builder (3.1.4)
     coderay (1.1.0)
     columnize (0.3.6)
@@ -134,6 +137,7 @@ DEPENDENCIES
   active_attr
   activerecord
   barrister
+  barrister-rails
   foreman
   pg
   pry
