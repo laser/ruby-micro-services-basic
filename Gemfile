@@ -1,26 +1,18 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.2'
-
-gem 'pg'
+gem 'active_attr'
 gem 'barrister'
 gem 'barrister-rails'
-gem 'active_attr'
 gem 'foreman'
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
+gem 'pg'
+gem 'rails', '4.0.2'
 
 ##### UserService
 
-gem 'rake'
-gem 'sinatra'
 gem 'activerecord'
-gem 'sinatra-activerecord'
-gem 'barrister'
-gem 'rerun'
+gem 'barrister-sinatra'
 gem 'pg'
 gem 'pry'
 gem 'pry-debugger'
+gem 'rake'
+gem 'rerun'
