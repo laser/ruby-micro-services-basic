@@ -1,5 +1,14 @@
+require 'erb'
+require 'active_record'
+require './models.rb'
+
 class UserService
   USER_ATTRIBUTES = %w(id full_name email phone_number)
+
+  def initialize
+    dbconfig = YAML.load(ERB.new(File.read(ENV['DB_YML_PATH'])).result)
+    ActiveRecord::Base.establish_connection(dbconfig[ENV['RACK_ENV'] || 'development'])
+  end
 
   def get_all_users()
     guard { User.all.map &method(:to_serializable) }
@@ -31,12 +40,14 @@ private
   end
 
   def guard
-    begin
-      yield
-    rescue ActiveRecord::RecordNotFound => e
-      raise Barrister::RpcException.new(101, e.message)
-    rescue ActiveRecord::RecordInvalid => e
-      raise Barrister::RpcException.new(100, e.message)
+    ActiveRecord::Base.connection_pool.with_connection do
+      begin
+        yield
+      rescue ActiveRecord::RecordNotFound => e
+        raise Barrister::RpcException.new(101, e.message)
+      rescue ActiveRecord::RecordInvalid => e
+        raise Barrister::RpcException.new(100, e.message)
+      end
     end
   end
 end
